@@ -1,0 +1,7 @@
+BOT_TOKEN_HERE
+SUPERADMIN_CHATID_HERE
+/path/to/clash.yaml
+/path/to/instruction.txt
+/path/to/users.txt
+/path/to/admins.txt
+http://link.to/download/clash.yaml
