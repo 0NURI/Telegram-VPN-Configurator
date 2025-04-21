@@ -1,0 +1,26 @@
+mixed-port: 7890
+allow-lan: false
+external-controller: 127.0.0.1:PORT
+secret: "your-secret-here" # MIGHT NOT EVEN NEED
+
+proxies: # VPN SETTINGS
+  - name: "YOR-NAME"
+    type: YOUR-TYPE
+    server: YOUR-SERVER
+    port: YOUR-PORT
+    cipher: YOUR-CIPHER
+    password: YOUR-PASSWORD
+
+proxy-groups:
+  - name: Proxy
+    type: select
+    proxies:
+      - MYVPN
+
+# BEFORE #start YOU PUT YOUR CONST (UNCHANGEBLE) RULES. AFTER #start YOU PUT RULES, WHICH USERS MIGHT CHANGE.
+# KEEP IN MIND TO KEEP -MATCH,DIRECT AT THE END
+rules:
+  - DOMAIN-SUFFIX,const.example,Proxy
+#start
+  - DOMAIN-SUFFIX,changele.example,Proxy
+  - MATCH,DIRECT
