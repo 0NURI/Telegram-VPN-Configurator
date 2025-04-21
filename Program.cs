@@ -24,8 +24,11 @@ bot.StartReceiving(
     },
     cancellationToken: cts.Token
 );
+
 Console.WriteLine($"@{me.Username} is running...");
-await bot.SendMessage(SUPERADMIN_ID, $"@{me.Username} пересобран и запущен!");
+if(SUPERADMIN_ID != 0) await bot.SendMessage(SUPERADMIN_ID, $"@{me.Username} пересобран и запущен!");
+else Console.WriteLine("[!] SUPERADMIN_ID не задан — бот запущен в тестовом режиме.");
+
 Thread.Sleep(Timeout.Infinite);
 
 async Task HandleErrorAsync(ITelegramBotClient bot, Exception exception, HandleErrorSource source,CancellationToken cancellationToken)
@@ -73,11 +76,17 @@ async Task HandleMessage(Message msg)
 {
     var Users = await LoadUsers(usersPath);
     var Admins = await LoadUsers(adminsPath);
+    if (SUPERADMIN_ID == 0)
+    {
+        Console.WriteLine($"[!] Новый пользователь: Chat ID: {msg.Chat.Id} — @{msg.Chat.Username}");
+        await bot.SendMessage(msg.Chat.Id, "🛠 Бот еще не настроен. Админ должен указать Chat ID в config.txt");
+        return;
+    }
+
     if (!Users.ContainsKey(msg.Chat.Id))
     {
         await bot.SendMessage(msg.Chat.Id, "⛔ У тебя нет доступа к этому боту.");
         await bot.SendMessage(SUPERADMIN_ID, $"⚠️ @{msg.Chat.Username} пытается использовать бота ⚠️\n\nChat Id пользователя:\n<code>{msg.Chat.Id}</code>", parseMode: ParseMode.Html);
-        Console.WriteLine(msg.Chat.Id);
         return;
     }
     if (UserInQueue(RulesAddingQueue, msg.Chat.Id)) EnqueueEdit(() => RulesAdding(bot, msg));
