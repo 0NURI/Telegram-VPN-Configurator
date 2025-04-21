@@ -22,7 +22,6 @@ This Telegram bot allows you to collaboratively manage a VPN configuration (YAML
 
 - .NET 8
 - Telegram.Bot 22.4.4
-- C#
 
 ## ⚙️ Requirements
 
@@ -33,8 +32,8 @@ This Telegram bot allows you to collaboratively manage a VPN configuration (YAML
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/your-user/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/0NURI/Telegram-VPN-Configurator.git
+cd Telegram-VPN-Configurator
 ```
 
 2. Install .NET 8 if needed:
@@ -42,18 +41,18 @@ cd your-repo-name
 sudo apt install dotnet-sdk-8.0
 ```
 
-3. Fill `config.txt` (one line per setting):
+3. Edit `config.txt` (one line per setting):
 ```
-<YOUR_BOT_TOKEN>
-SUPERADMIN_CHATID_HERE
-/path/to/clash.yaml
-/path/to/instruction.txt
-/path/to/users.txt
-/path/to/admins.txt
-http://link.to/download/clash.yaml
+<YOUR_BOT_TOKEN> - TG Bot token, you get in when you create a bot via @BotFather.
+SUPERADMIN_CHATID_HERE - Do not edit right now.
+/path/to/clash.yaml - Path to your yaml file. Use and edit the provided yaml file. Keep in mind not to delete #start.
+/path/to/instruction.txt - Path to your instruction file. Create one yourself or use the one provided.
+/path/to/users.txt - Path to an empty users.txt file, create it by yourself.
+/path/to/admins.txt - Path to an empty admins.txt file, create it by yourself.
+http://link.to/download/clash.yaml - The link shadowrocket or clash will use to download the config. You can add it here when you implement this opportunity (using nginx for example).
 ```
 
-4. Launch bot once and send it any message. It will print your `chat_id`. Replace `SUPERADMIN_CHATID_HERE` with it, then restart the bot.
+4. Launch bot once and send it any message. It will print your `chat_id` in the console. Replace `SUPERADMIN_CHATID_HERE` with it, then restart the bot.
 
 ```bash
 dotnet run
@@ -110,7 +109,7 @@ MIT
 
 Телеграм-бот для управления YAML конфигурацией VPN (Clash, Shadowrocket и др.) с помощью простого и защищённого интерфейса.
 
-## 📌 Возможности
+## ✨ Возможности
 
 - Добавление и удаление правил обхода блокировок
 - Изменение настроек VPN (сервер, порт, шифр, пароль)
@@ -120,32 +119,38 @@ MIT
 
 ## ⚙️ Требования
 
-- .NET 8: https://dotnet.microsoft.com/download
-- Telegram Bot API Token (через @BotFather)
-- ОС: Windows, Linux, macOS (поддерживается кроссплатформенно)
-
+- .NET 8
+- Telegram.Bot 22.4.4
+  
 ## 🛠 Установка
 
-1. Установите .NET 8.
-2. Клонируйте репозиторий:
+1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/yourname/Telegram-VPN-Configurator.git
+git clone https://github.com/0NURI/Telegram-VPN-Configurator.git
+cd Telegram-VPN-Configurator
 ```
-3. Откройте проект в Visual Studio Code или любом редакторе.
-4. Отредактируйте `config.txt`, добавив по строкам:
-    1. токен Telegram-бота,
-    2. SUPERADMIN_CHATID_HERE (замените после первого запуска),
-    3. путь к clash.yaml,
-    4. путь к instruction.txt,
-    5. путь к users.txt,
-    6. путь к admins.txt,
-    7. ссылка для на скачивание файла yaml для shadowrocket или другого приложения.
-5. Запустите:
+
+2. Установите .NET 8:
+```bash
+sudo apt install dotnet-sdk-8.0
+```
+
+3. Отредактируйте `config.txt`:
+```
+<YOUR_BOT_TOKEN> - Токен телеграм бота, можно получить при создании бота через @BotFather.
+SUPERADMIN_CHATID_HERE - На данном этапе не редактируйте.
+/path/to/clash.yaml - Путь к вашему yaml файлу. Редактируйте и используте предоставленный  шаблон. Обратите внимание, что нельзя удалять строку #start.
+/path/to/instruction.txt - Путь к вашему файлу с инструкцией для пользователей. Создайте файл самостоятельно или используйте предоставленный.
+/path/to/users.txt - Путь к файлу с пользователями. Создайте его, но оставьте пустым.
+/path/to/admins.txt - Путь к файлу с админами. Создайте его, но оставьте пустым.
+http://link.to/download/clash.yaml - Ссылка на скачивание yaml файла для подгрузки в shadowrocket/clash. Можете добавить как реализуете такую возможность (например через nginx).
+```
+
+4. Запустите бота и отправьте ему сообщение. В консоли будет написан ваш `chat_id`. Теперь замените `SUPERADMIN_CHATID_HERE` в `confix.txt` и перезапустите бота.
+
 ```bash
 dotnet run
 ```
-
-После запуска напишите боту — получите свой chat ID, замените им SUPERADMIN_CHATID_HERE в конфиге, перезапустите бота.
 
 ## 📋 Доступные команды
 
@@ -161,7 +166,7 @@ dotnet run
 - 💥 Удалить пользователя
 - 👥 Список пользователей
 - 🗣 Объявление
-- ♻️ Заменить CLASH файл
+- ♻️ Заменить Clash файл
 
 ## 📂 YAML структура
 
@@ -172,7 +177,7 @@ rules:
 #start
   - DOMAIN-SUFFIX,editable.example,Proxy
 ```
-Всё, что до `#start` — неизменяемо, всё после — редактируется пользователями.
+Всё, что до `#start` — не будет выведено на изменение, всё после — редактируется пользователями.
 
 ## 📝 Лицензия
 
