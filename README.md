@@ -43,7 +43,7 @@ sudo apt install dotnet-sdk-8.0
 
 3. Edit `config.txt` (one line per setting):
 ```
-<YOUR_BOT_TOKEN> - TG Bot token, you get in when you create a bot via @BotFather.
+BOT_TOKEN_HERE - TG Bot token, you get in when you create a bot via @BotFather.
 SUPERADMIN_CHATID_HERE - Do not edit right now.
 /path/to/clash.yaml - Path to your yaml file. Use and edit the provided yaml file. Keep in mind not to delete #start.
 /path/to/instruction.txt - Path to your instruction file. Create one yourself or use the one provided.
@@ -137,7 +137,7 @@ sudo apt install dotnet-sdk-8.0
 
 3. Отредактируйте `config.txt`:
 ```
-<YOUR_BOT_TOKEN> - Токен телеграм бота, можно получить при создании бота через @BotFather.
+BOT_TOKEN_HERE - Токен телеграм бота, можно получить при создании бота через @BotFather.
 SUPERADMIN_CHATID_HERE - На данном этапе не редактируйте.
 /path/to/clash.yaml - Путь к вашему yaml файлу. Редактируйте и используте предоставленный  шаблон. Обратите внимание, что нельзя удалять строку #start.
 /path/to/instruction.txt - Путь к вашему файлу с инструкцией для пользователей. Создайте файл самостоятельно или используйте предоставленный.
