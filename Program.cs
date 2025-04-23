@@ -74,19 +74,19 @@ async Task HandleUpdateAsync(ITelegramBotClient bot, Update update, Cancellation
 }
 async Task HandleMessage(Message msg)
 {
-    var Users = await LoadUsers(usersPath);
-    var Admins = await LoadUsers(adminsPath);
     if (SUPERADMIN_ID == 0)
     {
         Console.WriteLine($"[!] Новый пользователь: Chat ID: {msg.Chat.Id} — @{msg.Chat.Username}");
         await bot.SendMessage(msg.Chat.Id, "🛠 Бот еще не настроен. Админ должен указать Chat ID в config.txt");
         return;
     }
-
+    var Users = await LoadUsers(usersPath);
+    var Admins = await LoadUsers(adminsPath);
     if (!Users.ContainsKey(msg.Chat.Id))
     {
         await bot.SendMessage(msg.Chat.Id, "⛔ У тебя нет доступа к этому боту.");
         await bot.SendMessage(SUPERADMIN_ID, $"⚠️ @{msg.Chat.Username} пытается использовать бота ⚠️\n\nChat Id пользователя:\n<code>{msg.Chat.Id}</code>", parseMode: ParseMode.Html);
+        Console.WriteLine(msg.Chat.Id);
         return;
     }
     if (UserInQueue(RulesAddingQueue, msg.Chat.Id)) EnqueueEdit(() => RulesAdding(bot, msg));
@@ -110,7 +110,7 @@ async Task HandleMessage(Message msg)
             break;
         case "🚨 Инструкция и назначение 🚨":
             string instruction = string.Join('\n', await DownloadFileAsLines(instructionPath));
-            await bot.SendMessage(msg.Chat.Id, instruction, ParseMode.Html);
+            await bot.SendMessage(msg.Chat.Id, instruction, parseMode: ParseMode.Html);
             EnqueueEdit(async () => await StartMenu(msg));
             break;
         case "🌐 Информация о VPN":
